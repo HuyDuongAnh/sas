@@ -1,0 +1,12 @@
+data work.EuropeCars;
+	set sashelp.cars;
+	where Origin="Europe";
+	length KmL_Group $12;
+	AvgMPG=mean(MPG_City, MPG_Highway);
+	AvgKmL=AvgMPG/2.352;
+	format Avg:4.1;
+	if AvgKmL < 8 then Kml_Group="Under 8 Kml";
+		else if AvgKmL < 10 then KmL_Group="8-10 Kml";
+		else KmL_Group="Over 10 KmL";
+	keep Make Model Type MSRP Kml_Group AvgKmL;
+run;
